@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eCIB Portal - Credit Information</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="logo">eCIB</div>
+            <nav class="main-nav">
+                <a href="#" class="active">Home</a>
+                <a href="#">Generate CIR</a>
+                <a href="#">Legal CIR</a>
+            </nav>
+        </header>
+
+        <!-- Main Content Section -->
+        <main class="main-content">
+            <div class="search-section">
+                <h2>Credit Information Search</h2>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="newNic">New NIC:</label>
+                        <input type="text" id="newNic" placeholder="Enter New NIC">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="passportNo">Passport NO:</label>
+                        <input type="text" id="passportNo" placeholder="Enter Passport Number">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ntn">NTN:</label>
+                        <input type="text" id="ntn" placeholder="Enter NTN">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="oldNic">OLD NIC:</label>
+                        <input type="text" id="oldNic" placeholder="Enter Old NIC">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dob">DOB:</label>
+                        <input type="date" id="dob">
+                    </div>
+                </div>
+                
+                <div class="form-buttons">
+                    <button class="btn search-btn">Search</button>
+                    <button class="btn clear-btn">Clear All</button>
+                </div>
+            </div>
+
+            <!-- Results Section (initially hidden) -->
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <h3>Individual Document</h3>
+                <div class="document-actions">
+                    <span>Q</span>
+                    <span>Go</span>
+                    <span>Admin v</span>
+                </div>
+                
+                <table class="document-table">
+                    <thead>
+                        <tr>
+                            <th>As of Date</th>
+                            <th>CNIC</th>
+                            <th>Name</th>
+                            <th>Tax No</th>
+                            <th>Borrower Code</th>
+                            <th>Inc. Old</th>
+                            <th>Date Of Birth</th>
+                            <th>Father Name</th>
+                            <th>Address City</th>
+                            <th>Passport No</th>
+                            <th>CWR</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsTableBody">
+                        <!-- Results will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+        <!-- Footer Section -->
+        <footer class="footer">
+            <p>eCIB Electronic Credit Information Bureau</p>
+        </footer>
+    </div>
+
+        <!-- Load jsPDF library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
