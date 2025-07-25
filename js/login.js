@@ -24,13 +24,13 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log("Login successful - redirecting...");
             try {
                 // Try relative path first
-                window.location.href = 'index.html';
+                window.location.href = 'main.html';
                 
                 // Fallback after short delay
                 setTimeout(() => {
-                    if (window.location.pathname.indexOf('login.html') > -1) {
+                    if (window.location.pathname.indexOf('index.html') > -1) {
                         console.log("Fallback redirect triggered");
-                        window.location.assign('index.html');
+                        window.location.assign('main.html');
                     }
                 }, 100);
             } catch (e) {
