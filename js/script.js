@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
             taxNo: '421011234567',
             borrowerCode: '42101-1234567-1',
             incOld: '421011234567',
-            dob: '15-JAN-85',
+            dob: '05/05/2000',
             fatherName: 'ABDUL KHAN',
             addressCity: 'KARACHI',
             passportNo: 'PK1234567'
@@ -24,11 +24,11 @@ document.addEventListener('DOMContentLoaded', function() {
         '35202-7654321-0': {
             asOfDate: '30-JUN-25',
             cnic: '35202-7654321-0',
-            name: 'FATIMA AHMED',
+            name: 'Ahmed Ali',
             taxNo: '352027654321',
             borrowerCode: '35202-7654321-0',
             incOld: '352027654321',
-            dob: '22-MAR-90',
+            dob: '10/12/1998',
             fatherName: 'MUHAMMAD AHMED',
             addressCity: 'LAHORE',
             passportNo: 'PK7654321'
@@ -36,11 +36,11 @@ document.addEventListener('DOMContentLoaded', function() {
         '61101-9988776-3': {
             asOfDate: '30-JUN-25',
             cnic: '61101-9988776-3',
-            name: 'SAAD MAHMOOD',
+            name: 'Sara Khan',
             taxNo: '611019988776',
             borrowerCode: '61101-9988776-3',
             incOld: '611019988776',
-            dob: '10-OCT-78',
+            dob: '18/09/2001',
             fatherName: 'MAHMOOD ALI',
             addressCity: 'ISLAMABAD',
             passportNo: 'PK9988776'
@@ -48,11 +48,11 @@ document.addEventListener('DOMContentLoaded', function() {
         '37406-1122334-5': {
             asOfDate: '30-JUN-25',
             cnic: '37406-1122334-5',
-            name: 'SANA JAVED',
+            name: 'Usman Tariq',
             taxNo: '374061122334',
             borrowerCode: '37406-1122334-5',
             incOld: '374061122334',
-            dob: '05-DEC-95',
+            dob: '20/03/1997',
             fatherName: 'JAVED IQBAL',
             addressCity: 'PESHAWAR',
             passportNo: 'PK1122334'
