@@ -1,4 +1,4 @@
-¢defVar --name email_id --type String --value "vishakapahuja976@gmail.com"
+³defVar --name email_id --type String --value "vishakapahuja976@gmail.com"
 defVar --name email_pass --type String --value "ehqa shau fqtd itmp"
 defVar --name excelfile --type Excel
 defVar --name ExcelTable --type DataTable
@@ -10,23 +10,28 @@ defVar --name firstfile --type String
 defVar --name newfile --type String
 defVar --name increment --type Numeric --value 1
 defVar --name FilePaths --type List --innertype String
+defVar --name Banker_ID --type String --value "alishan@ubl.com.pk"
+defVar --name Banker_pass --type String --value 12345
 excelOpen --file "D:\\ECIB Portal\\Candidate_Data.xlsx" excelfile=value
 excelGetTable --file ${excelfile} --getfirstsheet  --entiretable  ExcelTable=value
 webStart --name edge --type "Edge" --userprofilepreferences "AutomationOptimized" --downloadpath "C:\\Users\\Lenovo\\AppData\\Local\\IBM Robotic Process Automation\\downloads"
 webNavigate --url "https://ecib-portal.vercel.app/"
+webClick --selector "XPath" --xpath "//*[@id=\"username\"]"
+webSet --value "${Banker_ID}" --selector "XPath" --xpath "//*[@id=\"username\"]" --simulatehuman 
+webClick --selector "XPath" --xpath "//*[@id=\"password\"]" --simulatehuman 
+webSet --value "${Banker_pass}" --selector "XPath" --xpath "//*[@id=\"password\"]" --simulatehuman 
+webClick --selector "XPath" --xpath "//*[@id=\"loginForm\"]/button" --simulatehuman 
 for --variable ${count} --from 2 --to ${ExcelTable.Rows} --step 1
-	excelGet --file ${excelfile} --getfirstsheet  --row ${count} --column 1 output=value
 	webClick --selector "XPath" --xpath "//*[@id=\"newNic\"]" --simulatehuman 
+	excelGet --file ${excelfile} --getfirstsheet  --row ${count} --column 1 output=value
 	webSet --value "${output}" --selector "XPath" --xpath "//*[@id=\"newNic\"]" --simulatehuman 
 	delay --timeout "00:00:03"
-	webClick --selector "XPath" --xpath "/html/body/div/main/div[1]/div[2]/button[1]" --simulatehuman 
+	webClick --selector "XPath" --xpath "/html/body/div/main/div[1]/div/div[1]/div[3]/button[1]" --simulatehuman 
 	webClick --selector "XPath" --xpath "//*[@id=\"resultsTableBody\"]/tr/td[11]/button" --simulatehuman 
-	delay --timeout "00:00:07"
 	getFiles --path "C:\\Users\\Lenovo\\AppData\\Local\\IBM Robotic Process Automation\\downloads" --filemask "*.pdf" --ignorecase  folder=value
+	delay --timeout "00:00:05"
 	get --collection "${folder}" --index 1 firstfile=value
-	//messageBox --title paths --text "This is first file path : ${firstfile}" --icon "Information" --buttons "OK" --defaultbutton "FirstButton"
 	fileRename --file "${firstfile}" --newname "${output}.pdf" newfile=value
-	//messageBox --title paths --text "This is renamed file path : ${newfile}" --icon "Information" --buttons "OK" --defaultbutton "FirstButton"
 	fileMove --from "${newfile}" --to "D:\\ECIB Portal"
 next
 webClose --name edge --leavebrowseropen *	23.0.20.0

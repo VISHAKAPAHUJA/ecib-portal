@@ -1,4 +1,64 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Valid CNICs database
+    const validCNICs = [
+        '42101-1234567-1',
+        '35202-7654321-0',
+        '61101-9988776-3',
+        '37406-1122334-5'
+    ];
+
+    // Mock data for each valid CNIC
+    const mockDataDatabase = {
+        '42101-1234567-1': {
+            asOfDate: '30-JUN-25',
+            cnic: '42101-1234567-1',
+            name: 'ALI KHAN',
+            taxNo: '421011234567',
+            borrowerCode: '42101-1234567-1',
+            incOld: '421011234567',
+            dob: '15-JAN-85',
+            fatherName: 'ABDUL KHAN',
+            addressCity: 'KARACHI',
+            passportNo: 'PK1234567'
+        },
+        '35202-7654321-0': {
+            asOfDate: '30-JUN-25',
+            cnic: '35202-7654321-0',
+            name: 'FATIMA AHMED',
+            taxNo: '352027654321',
+            borrowerCode: '35202-7654321-0',
+            incOld: '352027654321',
+            dob: '22-MAR-90',
+            fatherName: 'MUHAMMAD AHMED',
+            addressCity: 'LAHORE',
+            passportNo: 'PK7654321'
+        },
+        '61101-9988776-3': {
+            asOfDate: '30-JUN-25',
+            cnic: '61101-9988776-3',
+            name: 'SAAD MAHMOOD',
+            taxNo: '611019988776',
+            borrowerCode: '61101-9988776-3',
+            incOld: '611019988776',
+            dob: '10-OCT-78',
+            fatherName: 'MAHMOOD ALI',
+            addressCity: 'ISLAMABAD',
+            passportNo: 'PK9988776'
+        },
+        '37406-1122334-5': {
+            asOfDate: '30-JUN-25',
+            cnic: '37406-1122334-5',
+            name: 'SANA JAVED',
+            taxNo: '374061122334',
+            borrowerCode: '37406-1122334-5',
+            incOld: '374061122334',
+            dob: '05-DEC-95',
+            fatherName: 'JAVED IQBAL',
+            addressCity: 'PESHAWAR',
+            passportNo: 'PK1122334'
+        }
+    };
+
     // Check if jsPDF is available
     const pdfLibraryLoaded = typeof window.jspdf !== 'undefined';
     if (!pdfLibraryLoaded) {
@@ -22,44 +82,43 @@ document.addEventListener('DOMContentLoaded', function() {
     // Search button functionality
     const searchBtn = document.querySelector('.search-btn');
     searchBtn.addEventListener('click', function() {
-        // Validate inputs
-        const newNic = document.getElementById('newNic').value;
-        const passportNo = document.getElementById('passportNo').value;
-        const ntn = document.getElementById('ntn').value;
-        const oldNic = document.getElementById('oldNic').value;
-        const dob = document.getElementById('dob').value;
+        // Get search values
+        const newNic = document.getElementById('newNic').value.trim();
+        const oldNic = document.getElementById('oldNic').value.trim();
         
-        // At least one field should be filled
-        if (!newNic && !passportNo && !ntn && !oldNic && !dob) {
-            alert('Please fill at least one search field');
+        // Check if CNIC field is filled
+        if (!newNic && !oldNic) {
+            alert('Please enter either New NIC or Old NIC');
             return;
         }
         
-        // Here you would typically make an API call to fetch CIR data
-        // For now, we'll use mock data
-        const mockData = {
-            asOfDate: '30-JUN-25',
-            cnic: '36001-1544710-2',
-            name: 'SIMZA FATIMA',
-            taxNo: '-',
-            borrowerCode: '36001-1544710-2',
-            incOld: '22-MJH69',
-            dob: '22-JUN-69',
-            fatherName: 'Father',
-            addressCity: 'DISTRICT VENWB',
-            passportNo: '-'
-        };
+        // Check against valid CNICs
+        const searchCNIC = newNic || oldNic;
+        if (validCNICs.includes(searchCNIC)) {
+            // Display matching record
+            displayResults(mockDataDatabase[searchCNIC]);
+        } else {
+            // Show "Record not found" message
+            const resultsSection = document.getElementById('resultsSection');
+            const tableBody = document.getElementById('resultsTableBody');
+            
+            // Clear previous results
+            tableBody.innerHTML = '';
+            
+            // Create message row
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td colspan="11" style="text-align: center; color: red; font-weight: bold;">
+                    Record not found for CNIC: ${searchCNIC}
+                </td>
+            `;
+            tableBody.appendChild(row);
+            
+            // Show the results section
+            resultsSection.style.display = 'block';
+        }
         
-        // Display the results
-        displayResults(mockData);
-        
-        console.log('Search initiated with:', {
-            newNic,
-            passportNo,
-            ntn,
-            oldNic,
-            dob
-        });
+        console.log('Search initiated for CNIC:', searchCNIC);
     });
     
     // Function to display results in the table
@@ -105,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
         resultsSection.style.display = 'block';
     }
     
-    // Function to generate CWR document
+    // Function to generate CWR document (unchanged)
     function generateCWRDocument(data) {
         try {
             const { jsPDF } = window.jspdf;
@@ -113,17 +172,17 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Add header
             doc.setFontSize(18);
-            doc.setTextColor(40, 62, 80); // Dark blue color
+            doc.setTextColor(40, 62, 80);
             doc.text('eCIB Credit Information Report', 105, 20, { align: 'center' });
             
             // Add divider line
-            doc.setDrawColor(52, 152, 219); // Blue color
+            doc.setDrawColor(52, 152, 219);
             doc.setLineWidth(0.5);
             doc.line(20, 25, 190, 25);
             
             // Set default font
             doc.setFontSize(12);
-            doc.setTextColor(0, 0, 0); // Black color
+            doc.setTextColor(0, 0, 0);
             
             let yPosition = 40;
             
@@ -159,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Add footer
             doc.setFontSize(10);
-            doc.setTextColor(100, 100, 100); // Gray color
+            doc.setTextColor(100, 100, 100);
             doc.text('© eCIB Electronic Credit Information Bureau', 105, 285, { align: 'center' });
             
             // Save the PDF
@@ -170,7 +229,4 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Error generating PDF document. Please try again or contact support.');
         }
     }
-
-    // Additional existing functionality can be added below
-    // For example, navigation menu handlers or other event listeners
 });

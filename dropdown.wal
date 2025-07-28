@@ -1,0 +1,5 @@
+úwebStart --name Chrome --type "Chrome" --userprofilepreferences "AutomationOptimized" --downloadpath "C:\\Users\\Lenovo\\AppData\\Local\\IBM Robotic Process Automation\\downloads"
+webNavigate --url "https://openweathermap.org/api"
+webClick --selector "XPath" --xpath "//*[@id=\"dashboards-dropdown\"]" --simulatehuman 
+webSetComboBox --selectoptionby "MatchByText" --matchbytext "Energy Dashboard" --selector "XPath" --xpath "//*[@id=\"dashboards-dropdown\"]"
+webClose --name Chrome --leavebrowseropen *	23.0.20.0
